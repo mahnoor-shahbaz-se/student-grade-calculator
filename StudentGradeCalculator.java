@@ -1,0 +1,76 @@
+import java.util.*;
+
+public class StudentGradeCalculator {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter student name: ");
+        String studentName = sc.nextLine();
+
+        System.out.print("Enter number of subjects: ");
+        int numSubjects = Integer.parseInt(sc.nextLine());
+
+        int totalMarks = 0;
+
+        for (int i = 1; i <= numSubjects; i++) {
+            int marks = -1;
+
+            while (marks < 0 || marks > 100) {
+                System.out.print("Enter marks for Subject " + i + " (0-100): ");
+                marks = Integer.parseInt(sc.nextLine());
+
+                if (marks < 0 || marks > 100) {
+                    System.out.println("  Invalid! Marks must be between 0 and 100. Try again.");
+                }
+            }
+
+            totalMarks += marks;
+        }
+
+        double average = (double) totalMarks / numSubjects;
+
+        String grade;
+        String remarks;
+
+        if (average >= 90) {
+            grade = "A+";
+            remarks = "Outstanding";
+        } else if (average >= 80) {
+            grade = "A";
+            remarks = "Excellent";
+        } else if (average >= 70) {
+            grade = "B";
+            remarks = "Good";
+        } else if (average >= 60) {
+            grade = "C";
+            remarks = "Satisfactory";
+        } else if (average >= 50) {
+            grade = "D";
+            remarks = "Needs Improvement";
+        } else {
+            grade = "F";
+            remarks = "Fail";
+        }
+
+        String status = (average >= 50) ? "PASS" : "FAIL";
+
+        System.out.println();
+        System.out.println("==========================================");
+        System.out.println("|         STUDENT GRADE REPORT          |");
+        System.out.println("==========================================");
+        System.out.printf( "|  Student  : %-27s|%n", studentName);
+        System.out.printf( "|  Subjects : %-27d|%n", numSubjects);
+        System.out.printf( "|  Total    : %-27s|%n", totalMarks + " / " + (numSubjects * 100));
+        System.out.printf( "|  Average  : %-27s|%n", String.format("%.2f%%", average));
+        System.out.printf( "|  Grade    : %-27s|%n", grade);
+        System.out.printf( "|  Remarks  : %-27s|%n", remarks);
+        System.out.println("------------------------------------------");
+        System.out.printf( "|  Status   : %-27s|%n", status);
+        System.out.println("==========================================");
+
+        sc.close();
+    }
+
+}
